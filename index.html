@@ -2,36 +2,34 @@
 <html lang="id">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<meta name="viewport" content="width=device-width,initial-scale=1">
 <title>DSRT — Digital Smart Revise Technology</title>
 <style>
-  :root{--bg:#0f172a;--panel:#0b1220;--muted:#94a3b8;--accent:#06b6d4;--white:#e6eef6}
-  *{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui;}
-  html,body{height:100%;margin:0;background:linear-gradient(180deg,#071026 0%,#071228 100%);color:var(--white);}
-  .app{display:flex;gap:12px;align-items:stretch;min-height:100vh;padding:12px}
-  .sidebar{width:72px;background:rgba(255,255,255,0.03);border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:8px}
-  .tool-btn{width:56px;height:56px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:transparent;border:1px solid transparent}
-  .tool-btn.active{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border-color:rgba(255,255,255,0.04);box-shadow:0 4px 18px rgba(2,6,23,0.6)}
-  .topbar{flex:1;display:flex;flex-direction:column}
-  .top-controls{height:56px;display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(255,255,255,0.02);border-radius:10px}
-  .actions{display:flex;gap:8px;align-items:center}
-  .btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:8px;color:var(--white);cursor:pointer}
-  .btn.active{background:var(--accent);color:#fff;border-color:var(--accent)}
-  .main{flex:1;display:flex;gap:12px}
-  .canvas-wrap{flex:1;min-height:480px;background:linear-gradient(180deg,#082036,#071224);border-radius:12px;padding:12px;display:flex;flex-direction:column}
-  .viewer{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:8px;background:#081223}
-  canvas{max-width:100%;height:auto;display:block}
-  .rightpanel{width:340px;background:rgba(255,255,255,0.02);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px}
-  .panel-section{background:rgba(255,255,255,0.01);padding:10px;border-radius:8px}
-  label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
-  input[type=range]{width:100%}
-  .small{font-size:13px;color:var(--muted)}
-  @media(max-width:900px){.app{flex-direction:column;padding:8px}.sidebar{flex-direction:row;width:100%;height:64px}.rightpanel{width:100%;order:3}.topbar{order:1}.canvas-wrap{order:2}}
+:root{--bg:#0f172a;--panel:#0b1220;--muted:#94a3b8;--accent:#06b6d4;--white:#e6eef6}
+*{box-sizing:border-box;font-family:Inter,ui-sans-serif,system-ui;}
+html,body{height:100%;margin:0;background:linear-gradient(180deg,#071026 0%,#071228 100%);color:var(--white);}
+.app{display:flex;gap:12px;align-items:stretch;min-height:100vh;padding:12px}
+.sidebar{width:72px;background:rgba(255,255,255,0.03);border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:8px}
+.tool-btn{width:56px;height:56px;border-radius:10px;display:flex;align-items:center;justify-content:center;cursor:pointer;background:transparent;border:1px solid transparent}
+.tool-btn.active{background:linear-gradient(180deg, rgba(255,255,255,0.03), rgba(255,255,255,0.01));border-color:rgba(255,255,255,0.04);box-shadow:0 4px 18px rgba(2,6,23,0.6)}
+.topbar{flex:1;display:flex;flex-direction:column}
+.top-controls{height:56px;display:flex;align-items:center;justify-content:space-between;padding:8px 12px;background:rgba(255,255,255,0.02);border-radius:10px}
+.actions{display:flex;gap:8px;align-items:center}
+.btn{background:transparent;border:1px solid rgba(255,255,255,0.04);padding:8px 10px;border-radius:8px;color:var(--white);cursor:pointer}
+.main{flex:1;display:flex;gap:12px}
+.canvas-wrap{flex:1;min-height:480px;background:linear-gradient(180deg,#082036,#071224);border-radius:12px;padding:12px;display:flex;flex-direction:column}
+.viewer{flex:1;display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden;border-radius:8px;background:#081223}
+canvas{max-width:100%;height:auto;display:block}
+.rightpanel{width:340px;background:rgba(255,255,255,0.02);border-radius:12px;padding:12px;display:flex;flex-direction:column;gap:8px;overflow-y:auto}
+.panel-section{background:rgba(255,255,255,0.01);padding:10px;border-radius:8px}
+label{font-size:13px;color:var(--muted);display:block;margin-bottom:6px}
+input[type=range]{width:100%}
+.small{font-size:13px;color:var(--muted)}
+@media(max-width:900px){.app{flex-direction:column;padding:8px}.sidebar{flex-direction:row;width:100%;height:64px}.rightpanel{width:100%;order:3}.topbar{order:1}.canvas-wrap{order:2}}
 </style>
 </head>
 <body>
 <div class="app">
-  <!-- Sidebar Tools -->
   <div class="sidebar" role="toolbar" aria-label="Main tools">
     <button class="tool-btn active" data-tool="basic" title="Basic Tools">🛠</button>
     <button class="tool-btn" data-tool="paint" title="Painting & Manual">🎨</button>
@@ -39,7 +37,6 @@
     <button class="tool-btn" data-tool="ai" title="Generative AI">🤖</button>
   </div>
 
-  <!-- Main Area -->
   <div class="topbar">
     <div class="top-controls">
       <div class="actions">
@@ -48,7 +45,6 @@
         <button class="btn" id="saveBtn">Save</button>
         <button class="btn" id="undoBtn">Undo</button>
         <button class="btn" id="redoBtn">Redo</button>
-        <button class="btn" id="rotate90">Rotate 90°</button>
       </div>
       <div class="small">DSRT Prototype • Responsive • Tap / Click</div>
     </div>
@@ -61,61 +57,60 @@
         </div>
         <div style="margin-top:10px;display:flex;gap:8px;justify-content:space-between">
           <div class="small">Zoom: <span id="zoomVal">100%</span></div>
+          <div style="display:flex;gap:6px">
+            <button class="btn" id="fitBtn">Fit</button>
+            <button class="btn" id="rotate90">Rotate 90°</button>
+          </div>
         </div>
       </div>
 
-      <!-- Right Panel -->
       <div class="rightpanel">
-        <!-- Basic Tools -->
+        <!-- Basic Panel -->
         <div class="panel-section" id="basicPanel">
           <label>Basic Tools</label>
           <div style="display:flex;gap:6px;flex-wrap:wrap">
             <button class="btn subtool" data-tool="move">Move</button>
             <button class="btn subtool" data-tool="crop">Crop</button>
-            <button class="btn subtool" data-tool="rotate">Rotate</button>
             <button class="btn subtool" data-tool="flipH">Flip H</button>
             <button class="btn subtool" data-tool="flipV">Flip V</button>
           </div>
         </div>
-
-        <!-- Paint Tools -->
+        <!-- Paint Panel -->
         <div class="panel-section" id="paintPanel">
-          <label>Brush / Paint</label>
-          <input id="sizeRange" type="range" min="1" max="200" value="24">
-          <div class="small">Size: <span id="sizeVal">24</span></div>
-          <input id="opacityRange" type="range" min="0" max="1" step="0.01" value="1">
-          <div class="small">Opacity: <span id="opacityVal">1.00</span></div>
-          <input id="colorPicker" type="color" value="#ffffff">
-          <div style="display:flex;gap:4px;margin-top:6px">
+          <label>Painting & Manual</label>
+          <div style="display:flex;gap:8px;align-items:center">
+            <input id="sizeRange" type="range" min="1" max="200" value="24">
+            <div class="small">Size: <span id="sizeVal">24</span></div>
+          </div>
+          <div style="display:flex;gap:8px;margin-top:8px;align-items:center">
+            <input id="opacityRange" type="range" min="0" max="1" step="0.01" value="1">
+            <div class="small">Opacity: <span id="opacityVal">1.00</span></div>
+          </div>
+          <div style="margin-top:8px">
+            <input id="colorPicker" type="color" value="#ffffff">
             <button class="btn" id="eraserBtn">Eraser</button>
             <button class="btn" id="cloneBtn">Clone</button>
             <button class="btn" id="healBtn">Heal</button>
           </div>
         </div>
-
-        <!-- Retouch -->
+        <!-- Retouch Panel -->
         <div class="panel-section" id="retouchPanel">
-          <label>Adjustments / Filters</label>
-          <input type="range" id="brightness" min="-100" max="100" value="0">
-          <label class="small">Brightness</label>
-          <input type="range" id="contrast" min="-100" max="100" value="0">
-          <label class="small">Contrast</label>
-          <input type="range" id="saturation" min="-100" max="100" value="0">
-          <label class="small">Saturation</label>
-          <div style="display:flex;gap:4px;margin-top:6px">
+          <label>Smart Retouch</label>
+          <div style="display:flex;flex-wrap:wrap;gap:6px">
             <button class="btn" data-filter="grayscale">Grayscale</button>
             <button class="btn" data-filter="sepia">Sepia</button>
             <button class="btn" data-filter="invert">Invert</button>
             <button class="btn" data-filter="vintage">Vintage</button>
+            <button class="btn" id="smartEnhanceBtn">Smart Enhance</button>
           </div>
         </div>
-
-        <!-- AI / Professional -->
+        <!-- AI Panel -->
         <div class="panel-section" id="aiPanel">
-          <label>AI Tools / Professional</label>
-          <button class="btn" id="contentAwareBtn">Content-Aware Fill</button>
-          <button class="btn" id="genFillBtn">Generative Fill</button>
-          <button class="btn" id="smartEnhanceBtn">Smart Enhance</button>
+          <label>Generative / AI</label>
+          <div style="display:flex;flex-direction:column;gap:6px">
+            <button class="btn" id="contentAwareBtn">Content-Aware Fill</button>
+            <button class="btn" id="genFillBtn">Generative Fill</button>
+          </div>
         </div>
       </div>
     </div>
@@ -124,84 +119,132 @@
 
 <script>
 (function(){
-const base=document.getElementById('base'), overlay=document.getElementById('overlay');
-const baseCtx=base.getContext('2d'), ovCtx=overlay.getContext('2d');
+const base=document.getElementById('base');
+const overlay=document.getElementById('overlay');
+const baseCtx=base.getContext('2d');
+const ovCtx=overlay.getContext('2d');
 const fileIn=document.getElementById('filein');
-const openBtn=document.getElementById('openBtn'), saveBtn=document.getElementById('saveBtn');
-const undoBtn=document.getElementById('undoBtn'), redoBtn=document.getElementById('redoBtn');
+const openBtn=document.getElementById('openBtn');
+const saveBtn=document.getElementById('saveBtn');
+const undoBtn=document.getElementById('undoBtn');
+const redoBtn=document.getElementById('redoBtn');
 const rotate90=document.getElementById('rotate90');
-const sizeRange=document.getElementById('sizeRange'), sizeVal=document.getElementById('sizeVal');
-const opacityRange=document.getElementById('opacityRange'), opacityVal=document.getElementById('opacityVal');
+const sizeRange=document.getElementById('sizeRange');
+const sizeVal=document.getElementById('sizeVal');
+const opacityRange=document.getElementById('opacityRange');
+const opacityVal=document.getElementById('opacityVal');
 const colorPicker=document.getElementById('colorPicker');
-const eraserBtn=document.getElementById('eraserBtn'), cloneBtn=document.getElementById('cloneBtn'), healBtn=document.getElementById('healBtn');
-const contentAwareBtn=document.getElementById('contentAwareBtn'), genFillBtn=document.getElementById('genFillBtn'), smartEnhanceBtn=document.getElementById('smartEnhanceBtn');
-let activeTool='move', toolCategory='basic', isDrawing=false, lastPos=null, history={stack:[],idx:-1}, cloneSource=null;
+const eraserBtn=document.getElementById('eraserBtn');
+const cloneBtn=document.getElementById('cloneBtn');
+const healBtn=document.getElementById('healBtn');
+const contentAwareBtn=document.getElementById('contentAwareBtn');
+const genFillBtn=document.getElementById('genFillBtn');
+const smartEnhanceBtn=document.getElementById('smartEnhanceBtn');
 
-// Canvas resize
-function resizeCanvas(){
-  const rect=document.getElementById('viewer').getBoundingClientRect();
-  base.style.width=overlay.style.width=rect.width+'px';
-  base.style.height=overlay.style.height=(rect.width*2/3)+'px';
+let toolCategory='basic';
+let activeTool='move';
+let isDrawing=false;
+let lastPos=null;
+let history={stack:[],idx:-1};
+let cloneSource=null;
+
+function resizeCanvasToContainer(){
+  const viewer=document.getElementById('viewer');
+  const rect=viewer.getBoundingClientRect();
+  const maxW=Math.max(600,rect.width-24);
+  base.style.width=maxW+'px';
+  overlay.style.width=maxW+'px';
+  base.style.height=(maxW*(800/1200))+'px';
+  overlay.style.height=base.style.height;
 }
-window.addEventListener('resize',resizeCanvas);
-resizeCanvas();
+window.addEventListener('resize',resizeCanvasToContainer);
+resizeCanvasToContainer();
 
-// History
-function pushHistory(){try{const d=baseCtx.getImageData(0,0,base.width,base.height);history.stack=history.stack.slice(0,history.idx+1);history.stack.push(d);history.idx=history.stack.length-1;undoBtn.disabled=history.idx<=0;redoBtn.disabled=history.idx>=history.stack.length-1;}catch(e){}}
-function restoreHistory(i){if(i<0||i>=history.stack.length)return;baseCtx.putImageData(history.stack[i],0,0);history.idx=i;undoBtn.disabled=history.idx<=0;redoBtn.disabled=history.idx>=history.stack.length-1;}
+function pushHistory(){
+  try{
+    const data=baseCtx.getImageData(0,0,base.width,base.height);
+    history.stack=history.stack.slice(0,history.idx+1);
+    history.stack.push(data);
+    history.idx=history.stack.length-1;
+    updateUndoRedo();
+  }catch(e){console.warn('history push failed',e)}
+}
+function restoreHistory(i){if(i<0||i>=history.stack.length)return;baseCtx.putImageData(history.stack[i],0,0);history.idx=i;updateUndoRedo();}
+function updateUndoRedo(){undoBtn.disabled=history.idx<=0;redoBtn.disabled=history.idx>=history.stack.length-1;}
 
-// Open / Save
 openBtn.addEventListener('click',()=>fileIn.click());
-fileIn.addEventListener('change',e=>{const f=e.target.files[0];if(!f)return;const img=new Image();img.onload=()=>{
-  base.width=1200;base.height=800;overlay.width=1200;overlay.height=800;baseCtx.clearRect(0,0,base.width,base.height);
-  const ratio=Math.min(base.width/img.width, base.height/img.height); const w=img.width*ratio,h=img.height*ratio,x=(base.width-w)/2,y=(base.height-h)/2;
-  baseCtx.drawImage(img,x,y,w,h); ovCtx.clearRect(0,0,overlay.width,overlay.height); pushHistory(); resizeCanvas();
-};img.src=URL.createObjectURL(f);});
+fileIn.addEventListener('change',e=>{
+  const f=e.target.files[0];
+  if(!f)return;
+  const img=new Image();
+  img.onload=()=>{
+    base.width=1200;base.height=800; overlay.width=1200; overlay.height=800;
+    baseCtx.clearRect(0,0,base.width,base.height);
+    const ratio=Math.min(base.width/img.width, base.height/img.height);
+    const w=img.width*ratio; const h=img.height*ratio;
+    const x=(base.width-w)/2; const y=(base.height-h)/2;
+    baseCtx.drawImage(img,x,y,w,h); ovCtx.clearRect(0,0,overlay.width,overlay.height);
+    pushHistory(); resizeCanvasToContainer();
+  };
+  img.src=URL.createObjectURL(f);
+});
+
 saveBtn.addEventListener('click',()=>{
-  const tmp=document.createElement('canvas'); tmp.width=base.width; tmp.height=base.height; const t=tmp.getContext('2d');
-  t.drawImage(base,0,0); t.drawImage(overlay,0,0);
+  const tmp=document.createElement('canvas'); tmp.width=base.width; tmp.height=base.height; const tctx=tmp.getContext('2d');
+  tctx.drawImage(base,0,0); tctx.drawImage(overlay,0,0);
   const a=document.createElement('a'); a.href=tmp.toDataURL('image/png'); a.download='edited.png'; a.click();
 });
 
-// Undo / Redo
-undoBtn.addEventListener('click',()=>restoreHistory(history.idx-1));
-redoBtn.addEventListener('click',()=>restoreHistory(history.idx+1));
-
-// Rotate 90°
 rotate90.addEventListener('click',()=>{
   const tmp=document.createElement('canvas'); tmp.width=base.width; tmp.height=base.height; const t=tmp.getContext('2d'); t.drawImage(base,0,0);
-  baseCtx.save(); baseCtx.clearRect(0,0,base.width,base.height); baseCtx.translate(base.width/2,base.height/2); baseCtx.rotate(Math.PI/2); baseCtx.drawImage(tmp,-base.width/2,-base.height/2); baseCtx.restore(); pushHistory();
+  baseCtx.clearRect(0,0,base.width,base.height); baseCtx.save();
+  baseCtx.translate(base.width/2,base.height/2); baseCtx.rotate(Math.PI/2);
+  baseCtx.drawImage(tmp,-base.width/2,-base.height/2); baseCtx.restore(); pushHistory();
 });
 
-// Brush settings
-sizeRange.addEventListener('input',()=>sizeVal.textContent=sizeRange.value);
-opacityRange.addEventListener('input',()=>opacityVal.textContent=parseFloat(opacityRange.value).toFixed(2));
-[eraserBtn,cloneBtn,healBtn].forEach(b=>b.addEventListener('click',()=>{[eraserBtn,cloneBtn,healBtn].forEach(x=>x.classList.remove('active')); b.classList.add('active');}));
+document.querySelectorAll('.subtool').forEach(btn=>btn.addEventListener('click',()=>{
+  activeTool=btn.dataset.tool; document.querySelectorAll('.subtool').forEach(x=>x.classList.remove('active')); btn.classList.add('active');
+}));
 
-// Pointer Drawing
-function getPos(ev){const rect=overlay.getBoundingClientRect();const x=(ev.clientX-rect.left)*(overlay.width/rect.width);const y=(ev.clientY-rect.top)*(overlay.height/rect.height);return{x,y};}
-function stroke(from,to,color,size,opacity,mode='paint'){ovCtx.save();ovCtx.globalCompositeOperation=(mode==='erase')?'destination-out':'source-over';ovCtx.globalAlpha=opacity;ovCtx.lineCap='round';ovCtx.lineJoin='round';ovCtx.lineWidth=size;ovCtx.strokeStyle=color;ovCtx.beginPath();ovCtx.moveTo(from.x,from.y);ovCtx.lineTo(to.x,to.y);ovCtx.stroke(); ovCtx.restore();}
-function commit(){baseCtx.drawImage(overlay,0,0); ovCtx.clearRect(0,0,overlay.width,overlay.height); pushHistory();}
+document.querySelectorAll('.tool-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.tool-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active'); toolCategory=btn.getAttribute('data-tool');
+    document.querySelectorAll('.panel-section').forEach(p=>p.style.display='none');
+    switch(toolCategory){
+      case 'basic': document.getElementById('basicPanel').style.display='block'; break;
+      case 'paint': document.getElementById('paintPanel').style.display='block'; break;
+      case 'retouch': document.getElementById('retouchPanel').style.display='block'; break;
+      case 'ai': document.getElementById('aiPanel').style.display='block'; break;
+    }
+  });
+});
 
-overlay.addEventListener('pointerdown',ev=>{isDrawing=true; lastPos=getPos(ev); if(ev.altKey) cloneSource={...lastPos};});
-overlay.addEventListener('pointermove',ev=>{if(!isDrawing)return; const pos=getPos(ev); const size=Number(sizeRange.value); const opacity=Number(opacityRange.value); const color=colorPicker.value;
-if(eraserBtn.classList.contains('active')) stroke(lastPos,pos,color,size,opacity,'erase');
-else if(cloneBtn.classList.contains('active') && cloneSource){const s=Math.round(size); const sx=Math.round(cloneSource.x+(pos.x-lastPos.x)),sy=Math.round(cloneSource.y+(pos.y-lastPos.y)); const img=baseCtx.getImageData(sx-s,sy-s,s*2,s*2); ovCtx.putImageData(img,pos.x-s,pos.y-s);}
-else if(healBtn.classList.contains('active')){const s=Math.max(8,Math.round(size));const srcX=Math.min(base.width-1,pos.x+40);const srcY=Math.min(base.height-1,pos.y+40); const img=baseCtx.getImageData(0,0,base.width,base.height);for(let dy=-s;dy<=s;dy++){for(let dx=-s;dx<=s;dx++){const tx=Math.round(pos.x+dx),ty=Math.round(pos.y+dy),sx=Math.round(srcX+dx),sy=Math.round(srcY+dy);if(tx<0||tx>=base.width||ty<0||ty>=base.height) continue;if(sx<0||sx>=base.width||sy<0||sy>=base.height) continue;const t=(ty*base.width+tx)*4,sidx=(sy*base.width+sx)*4;img.data[t]=(img.data[t]*0.3+img.data[sidx]*0.7)|0; img.data[t+1]=(img.data[t+1]*0.3+img.data[sidx+1]*0.7)|0; img.data[t+2]=(img.data[t+2]*0.3+img.data[sidx+2]*0.7)|0;}} baseCtx.putImageData(img,0,0); pushHistory();}
-else stroke(lastPos,pos,color,size,opacity,'paint'); lastPos=pos;});
-overlay.addEventListener('pointerup',ev=>{isDrawing=false; lastPos=null; commit();});
-overlay.addEventListener('pointercancel',()=>{isDrawing=false; lastPos=null;});
+// Brush / Painting
+sizeRange.addEventListener('input',()=>{sizeVal.textContent=sizeRange.value});
+opacityRange.addEventListener('input',()=>{opacityVal.textContent=Number(opacityRange.value).toFixed(2)});
 
-// Filters / Retouch
-function applyFilters(){const imgData=baseCtx.getImageData(0,0,base.width,base.height);const data=imgData.data;
-const brightness=Number(document.getElementById('brightness').value),contrast=Number(document.getElementById('contrast').value),saturation=Number(document.getElementById('saturation').value);
-for(let i=0;i<data.length;i+=4){data[i]+=brightness;data[i+1]+=brightness;data[i+2]+=brightness;
-data[i]=(data[i]-128)*(1+contrast/100)+128;data[i+1]=(data[i+1]-128)*(1+contrast/100)+128;data[i+2]=(data[i+2]-128)*(1+contrast/100)+128;
-const avg=(data[i]+data[i+1]+data[i+2])/3;data[i]=avg+(data[i]-avg)*(1+saturation/100);data[i+1]=avg+(data[i+1]-avg)*(1+saturation/100);data[i+2]=avg+(data[i+2]-avg)*(1+saturation/100);}
-baseCtx.putImageData(imgData,0,0); pushHistory();}
-['brightness','contrast','saturation'].forEach(id=>document.getElementById(id).addEventListener('input',applyFilters));
+function getPointerPos(ev){
+  const rect=overlay.getBoundingClientRect();
+  const isTouch=ev.touches&&ev.touches[0];
+  const clientX=isTouch?ev.touches[0].clientX:ev.clientX;
+  const clientY=isTouch?ev.touches[0].clientY:ev.clientY;
+  const x=(clientX-rect.left)*(overlay.width/rect.width);
+  const y=(clientY-rect.top)*(overlay.height/rect.height);
+  return {x,y};
+}
 
-// Quick Filters Buttons
+function strokeLine(from,to,color,size,opacity,mode='paint'){
+  ovCtx.save();
+  ovCtx.globalCompositeOperation=(mode==='erase')?'destination-out':'source-over';
+  ovCtx.globalAlpha=opacity;
+  ovCtx.lineCap='round'; ovCtx.lineJoin='round'; ovCtx.lineWidth=size; ovCtx.strokeStyle=color;
+  ovCtx.beginPath(); ovCtx.moveTo(from.x,from.y); ovCtx.lineTo(to.x,to.y); ovCtx.stroke(); ovCtx.restore();
+}
+
+function commitOverlay(){baseCtx.drawImage(overlay,0,0); ovCtx.clearRect(0,0,overlay.width,overlay.height); pushHistory();}
+
+// Quick Filters
 document.querySelectorAll('#retouchPanel button[data-filter]').forEach(btn=>{
   btn.addEventListener('click',()=>{
     const filter=btn.getAttribute('data-filter');
@@ -222,41 +265,57 @@ document.querySelectorAll('#retouchPanel button[data-filter]').forEach(btn=>{
           data[i]=r*0.9+10; data[i+1]=g*0.85+5; data[i+2]=b*0.8+5; break;
       }
     }
-    baseCtx.putImageData(imgData,0,0);
-    pushHistory();
+    baseCtx.putImageData(imgData,0,0); pushHistory();
   });
 });
 
-// AI / Professional Simulation
-contentAwareBtn.addEventListener('click',()=>{
-  alert('Content-Aware Fill executed (simulated).');
-});
-genFillBtn.addEventListener('click',()=>{
-  alert('Generative Fill executed (simulated).');
-});
-smartEnhanceBtn.addEventListener('click',()=>{
-  alert('Smart Enhance executed (simulated).');
-});
+// AI / Professional placeholders
+contentAwareBtn.addEventListener('click',()=>alert('Content-Aware Fill executed (simulated).'));
+genFillBtn.addEventListener('click',()=>alert('Generative Fill executed (simulated).'));
+smartEnhanceBtn.addEventListener('click',()=>alert('Smart Enhance applied (simulated).'));
 
-// Tool Sidebar Switching
-document.querySelectorAll('.tool-btn').forEach(btn=>{
-  btn.addEventListener('click',()=>{
-    document.querySelectorAll('.tool-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    toolCategory=btn.getAttribute('data-tool');
-    document.querySelectorAll('.panel-section').forEach(p=>p.style.display='none');
-    switch(toolCategory){
-      case 'basic': document.getElementById('basicPanel').style.display='block'; break;
-      case 'paint': document.getElementById('paintPanel').style.display='block'; break;
-      case 'retouch': document.getElementById('retouchPanel').style.display='block'; break;
-      case 'ai': document.getElementById('aiPanel').style.display='block'; break;
-    }
-  });
-});
-// Initialize panels
+// Undo / Redo
+undoBtn.addEventListener('click',()=>{restoreHistory(history.idx-1)});
+redoBtn.addEventListener('click',()=>{restoreHistory(history.idx+1)});
+
+// Painting / Overlay Events
+function startDraw(ev){
+  if(toolCategory!=='paint') return;
+  isDrawing=true;
+  lastPos=getPointerPos(ev);
+  ev.preventDefault();
+}
+function draw(ev){
+  if(!isDrawing) return;
+  const pos=getPointerPos(ev);
+  strokeLine(lastPos,pos,colorPicker.value,parseInt(sizeRange.value),parseFloat(opacityRange.value));
+  lastPos=pos;
+}
+function endDraw(ev){
+  if(isDrawing){commitOverlay(); isDrawing=false; lastPos=null;}
+}
+overlay.addEventListener('mousedown',startDraw);
+overlay.addEventListener('mousemove',draw);
+overlay.addEventListener('mouseup',endDraw);
+overlay.addEventListener('mouseout',endDraw);
+overlay.addEventListener('touchstart',startDraw,{passive:false});
+overlay.addEventListener('touchmove',draw,{passive:false});
+overlay.addEventListener('touchend',endDraw);
+
+// Eraser
+eraserBtn.addEventListener('click',()=>{activeTool='erase';});
+
+// Clone / Heal (simulated)
+cloneBtn.addEventListener('click',()=>alert('Clone tool active (simulated).'));
+healBtn.addEventListener('click',()=>alert('Healing tool active (simulated).'));
+
+// Fit button
+document.getElementById('fitBtn').addEventListener('click',()=>{resizeCanvasToContainer();});
+
+// Initial display
+document.querySelectorAll('.panel-section').forEach(p=>p.style.display='none');
 document.getElementById('basicPanel').style.display='block';
-document.getElementById('paintPanel').style.display='none';
-document.getElementById('retouchPanel').style.display='none';
-document.getElementById('aiPanel').style.display='none';
 })();
 </script>
+</body>
+</html>
